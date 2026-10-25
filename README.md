@@ -1,10 +1,10 @@
-# Carvo - Serverless Fleet ALPR & Tracking Bot
+# Serverless Fleet ALPR & Wash Tracking Bot
 
 [![CI](https://github.com/onurvatansever/carvo-plate-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/onurvatansever/carvo-plate-tracker/actions/workflows/ci.yml)
 ![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB)
 ![AWS](https://img.shields.io/badge/AWS-Lambda%20%7C%20Rekognition%20%7C%20S3-FF9900)
 
-Fleet car wash operations typically rely on manual paper logs or spreadsheets to track hundreds of daily vehicles, leading to human error, duplicate entries, and billing disputes. **Carvo** eliminates manual tracking: staff simply send a photo of the vehicle to a Telegram bot, which automatically extracts the license plate, cross-references it against historical fleet data, prevents same-day duplicates, and generates ready-to-bill `.xlsx` reports on AWS S3.
+Fleet car wash operations typically rely on manual paper logs or spreadsheets to track hundreds of daily vehicles, leading to human error, duplicate entries, and billing disputes. Developed for **Carvo**'s fleet operations, this serverless system eliminates manual tracking: staff simply send a photo of the vehicle to a Telegram bot, which automatically extracts the license plate, cross-references it against historical fleet data, prevents same-day duplicates, and generates ready-to-bill `.xlsx` reports on AWS S3.
 
 ```mermaid
 flowchart LR
@@ -44,7 +44,7 @@ python -m unittest discover -s tests -v
 
 ## Türkçe Özet
 
-Filo oto yıkama operasyonlarında gün içinde yıkanan yüzlerce aracın kağıt veya elle tutulan listelerle takip edilmesi; yanlış plaka yazımı, mükerrer kayıtlar ve ay sonu mutabakat sorunlarına yol açar. **Carvo**, bu süreci tamamen otomatikleştirir: personel yıkadığı aracın fotoğrafını Telegram botuna gönderir; sistem plakayı otomatik okur, geçmiş filo kayıtlarıyla doğrular, aynı gün içinde mükerrer kaydı engeller ve S3 üzerindeki veriyi tek komutla Excel (`.xlsx`) raporuna dönüştürür.
+Filo oto yıkama operasyonlarında gün içinde yıkanan yüzlerce aracın kağıt veya elle tutulan listelerle takip edilmesi; yanlış plaka yazımı, mükerrer kayıtlar ve ay sonu mutabakat sorunlarına yol açar. **Carvo**'nun filo yıkama operasyonları için geliştirilen bu sunucusuz (Serverless) sistem süreci tamamen otomatikleştirir: personel yıkadığı aracın fotoğrafını Telegram botuna gönderir; sistem plakayı otomatik okur, geçmiş filo kayıtlarıyla doğrular, aynı gün içinde mükerrer kaydı engeller ve S3 üzerindeki veriyi tek komutla Excel (`.xlsx`) raporuna dönüştürür.
 
 - **Filo Hafızalı Bulanık Eşleştirme:** Köpük, parlama veya plaka vidaları yüzünden bozuk ya da eksik okunan plakaları (`34 KLN 458` veya `KLM 456`), geçmiş CSV kayıtlarındaki filo plakalarıyla karşılaştırarak otomatik düzeltir.
 - **Boyut ve Alan Filtresi:** Plakalık üzerindeki telefon numaralarını ve arka plan yazılarını `BoundingBox` karakter yüksekliğine göre eler; çift satırlı kare plakaları destekler.
