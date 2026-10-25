@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  Carvo Plaka Takip Botu — Serverless ALPR (Automatic License Plate Recognition)
+  Carvo Plate Tracker — Serverless ALPR (Automatic License Plate Recognition)
   and Fleet Wash Tracking Bot powered by AWS Lambda, Amazon Rekognition, and Amazon S3.
 
 Parameters:

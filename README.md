@@ -1,6 +1,6 @@
 # Carvo - Serverless Fleet ALPR & Tracking Bot
 
-[![CI](https://github.com/onurvatansever/carvo-plaka-takip-botu/actions/workflows/ci.yml/badge.svg)](https://github.com/onurvatansever/carvo-plaka-takip-botu/actions/workflows/ci.yml)
+[![CI](https://github.com/onurvatansever/carvo-plate-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/onurvatansever/carvo-plate-tracker/actions/workflows/ci.yml)
 ![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB)
 ![AWS](https://img.shields.io/badge/AWS-Lambda%20%7C%20Rekognition%20%7C%20S3-FF9900)
 
