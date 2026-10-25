@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Carvo Plaka Takip Botu — Serverless ALPR (Automatic License Plate Recognition)
+  and Fleet Wash Tracking Bot powered by AWS Lambda, Amazon Rekognition, and Amazon S3.
+
+Parameters:
+  TelegramToken:
+    Type: String
+    NoEcho: true
+    Description: Telegram Bot API token obtained from @BotFather
+  TelegramWebhookSecret:
+    Type: String
+    NoEcho: true
+    Description: Secret token verified via X-Telegram-Bot-Api-Secret-Token header
+  AllowedChatIds:
+    Type: String
+    Description: Comma-separated list of authorized Telegram chat IDs
+
+Resources:
+  FleetTrackingBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  CarvoPlateBotFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: carvo-plaka-bot
+      CodeUri: .
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.12
+      Architectures:
+        - x86_64
+      MemorySize: 128
+      Timeout: 15
+      Environment:
+        Variables:
+          TELEGRAM_TOKEN: !Ref TelegramToken
+          TELEGRAM_WEBHOOK_SECRET: !Ref TelegramWebhookSecret
+          ALLOWED_CHAT_IDS: !Ref AllowedChatIds
+          S3_BUCKET: !Ref FleetTrackingBucket
+      FunctionUrlConfig:
+        AuthType: NONE
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Ref FleetTrackingBucket
+        - Statement:
+            - Effect: Allow
+              Action:
+                - rekognition:DetectText
+              Resource: '*'
+
+Outputs:
+  WebhookFunctionUrl:
+    Description: HTTPS Webhook URL for Telegram Bot API
+    Value: !GetAtt CarvoPlateBotFunctionUrl.FunctionUrl
